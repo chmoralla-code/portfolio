@@ -107,6 +107,8 @@ Generate a bcrypt hash:
 node -e "const bcrypt = require('bcryptjs'); console.log(bcrypt.hashSync('your-password', 10));"
 ```
 
+If you paste a bcrypt hash into `.env.local`, escape each `$` as `\$` so Next.js keeps the value intact.
+
 ## Vercel Deployment
 
 1. Push your code to GitHub/GitLab/Bitbucket.

@@ -8,7 +8,7 @@ import bcryptjs from "bcryptjs";
 
 const DEFAULT_USERNAME = "admin";
 const DEFAULT_PASSWORD_HASH =
-  "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"; // hash of 'admin1234'
+  "$2b$10$kE1vC59GFAf4FZMrLvJJAeCxxvR99osRCevcYFGEw8OtR0qaSVrDe"; // hash of 'admin1234'
 
 /**
  * Get the configured admin username.
