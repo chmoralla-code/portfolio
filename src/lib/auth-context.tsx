@@ -29,7 +29,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
   useEffect(() => {
     async function checkAuth() {
       try {
-        const res = await fetch("/api/auth/me", { credentials: "include" });
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+        const res = await fetch("/api/auth/me", { credentials: "include", signal: controller.signal });
+        clearTimeout(timeout);
         const data = (await res.json()) as { authenticated: boolean };
         setIsLoggedIn(data.authenticated);
       } catch {
