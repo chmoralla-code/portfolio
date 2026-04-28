@@ -133,6 +133,34 @@ export const defaultPortfolioData: PortfolioData = {
     location: "San Francisco, CA",
     availability: "Open to freelance & full-time opportunities",
   },
+  settings: {
+    siteName: "Alex Portfolio",
+    heroBackgroundUrl:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=2000&h=1400&fit=crop",
+    accentColor: "#22d3ee",
+    headings: {
+      about: {
+        title: "About Me",
+        subtitle: "Who I am and what I do",
+      },
+      skills: {
+        title: "Skills",
+        subtitle: "Technologies I work with",
+      },
+      projects: {
+        title: "Projects",
+        subtitle: "Some of my recent work",
+      },
+      experience: {
+        title: "Experience",
+        subtitle: "Professional journey",
+      },
+      contact: {
+        title: "Contact",
+        subtitle: "Let’s build something great",
+      },
+    },
+  },
 };
 
 // In-memory fallback store
@@ -140,6 +168,48 @@ let memoryData: PortfolioData = JSON.parse(JSON.stringify(defaultPortfolioData))
 
 function cloneDeep<T>(value: T): T {
   return JSON.parse(JSON.stringify(value));
+}
+
+function normalizePortfolioData(data: Partial<PortfolioData>): PortfolioData {
+  return {
+    ...defaultPortfolioData,
+    ...data,
+    profile: { ...defaultPortfolioData.profile, ...(data.profile || {}) },
+    contact: { ...defaultPortfolioData.contact, ...(data.contact || {}) },
+    settings: {
+      ...defaultPortfolioData.settings,
+      ...(data.settings || {}),
+      headings: {
+        ...defaultPortfolioData.settings.headings,
+        ...(data.settings?.headings || {}),
+        about: {
+          ...defaultPortfolioData.settings.headings.about,
+          ...(data.settings?.headings?.about || {}),
+        },
+        skills: {
+          ...defaultPortfolioData.settings.headings.skills,
+          ...(data.settings?.headings?.skills || {}),
+        },
+        projects: {
+          ...defaultPortfolioData.settings.headings.projects,
+          ...(data.settings?.headings?.projects || {}),
+        },
+        experience: {
+          ...defaultPortfolioData.settings.headings.experience,
+          ...(data.settings?.headings?.experience || {}),
+        },
+        contact: {
+          ...defaultPortfolioData.settings.headings.contact,
+          ...(data.settings?.headings?.contact || {}),
+        },
+      },
+    },
+    skills: Array.isArray(data.skills) ? data.skills : defaultPortfolioData.skills,
+    projects: Array.isArray(data.projects) ? data.projects : defaultPortfolioData.projects,
+    experience: Array.isArray(data.experience) ? data.experience : defaultPortfolioData.experience,
+    socialLinks: Array.isArray(data.socialLinks) ? data.socialLinks : defaultPortfolioData.socialLinks,
+    about: typeof data.about === "string" ? data.about : defaultPortfolioData.about,
+  };
 }
 
 /**
@@ -152,8 +222,9 @@ export async function loadPortfolioData(): Promise<PortfolioData> {
     try {
       const data = await supabaseLoad();
       if (data) {
-        memoryData = cloneDeep(data);
-        return cloneDeep(data);
+        const normalized = normalizePortfolioData(data);
+        memoryData = cloneDeep(normalized);
+        return cloneDeep(normalized);
       }
     } catch (err) {
       console.warn("Supabase load failed, falling back:", err);
@@ -163,7 +234,7 @@ export async function loadPortfolioData(): Promise<PortfolioData> {
   // 2. Try JSON file (local dev)
   try {
     const raw = await fs.readFile(DATA_FILE, "utf-8");
-    memoryData = JSON.parse(raw) as PortfolioData;
+    memoryData = normalizePortfolioData(JSON.parse(raw) as Partial<PortfolioData>);
     return cloneDeep(memoryData);
   } catch {
     // File missing or unreadable
@@ -178,12 +249,13 @@ export async function loadPortfolioData(): Promise<PortfolioData> {
  * Tries Supabase first, then JSON file, then in-memory only.
  */
 export async function savePortfolioData(data: PortfolioData): Promise<void> {
-  memoryData = cloneDeep(data);
+  const normalized = normalizePortfolioData(data);
+  memoryData = cloneDeep(normalized);
 
   // 1. Try Supabase
   if (supabaseSave) {
     try {
-      await supabaseSave(data);
+      await supabaseSave(normalized);
       return;
     } catch (err) {
       console.warn("Supabase save failed, falling back:", err);
@@ -192,9 +264,8 @@ export async function savePortfolioData(data: PortfolioData): Promise<void> {
 
   // 2. Try JSON file (local dev)
   try {
-    await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2), "utf-8");
+    await fs.writeFile(DATA_FILE, JSON.stringify(normalized, null, 2), "utf-8");
   } catch {
     // Read-only filesystem — silently ignore; in-memory data is already saved
   }
 }
-

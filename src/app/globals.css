@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b1020;
-  --foreground: #f8fafc;
+  --background: #050505;
+  --foreground: #f4f4f5;
+  --surface: #0f0f10;
+  --surface-2: #151517;
+  --muted: #a1a1aa;
+  --line: rgba(255, 255, 255, 0.12);
+  --accent: #d4d4d8;
 }
 
 @theme inline {
@@ -23,7 +28,10 @@ html {
 
 body {
   min-height: 100%;
-  background: var(--background);
+  background:
+    radial-gradient(circle at 20% 10%, #141416 0, transparent 30%),
+    radial-gradient(circle at 80% 0%, #101012 0, transparent 35%),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   margin: 0;
@@ -43,30 +51,76 @@ a {
   @apply text-3xl font-bold tracking-tight sm:text-4xl;
 }
 
+.section-subtitle {
+  @apply mt-3 text-sm text-zinc-400 sm:text-base;
+}
+
 .card {
-  @apply rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:border-white/20 hover:bg-white/8;
+  @apply rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/8;
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-zinc-200 via-white to-zinc-400 bg-clip-text text-transparent;
+}
+
+.pill-label {
+  @apply inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-300;
 }
 
 /* Form inputs for admin dashboard */
 input, textarea, select {
-  @apply rounded-xl border border-white/15 bg-slate-950/60 px-4 py-2.5 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/10;
+  @apply rounded-xl border border-white/15 bg-zinc-950/70 px-4 py-2.5 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-white/35 focus:ring-2 focus:ring-white/10;
 }
 
 /* Button styles */
 .btn-primary {
-  @apply inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:brightness-110 disabled:opacity-50;
+  @apply inline-flex items-center justify-center rounded-xl border border-white/30 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 disabled:opacity-50;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-white/10;
+  @apply inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/10;
 }
 
 .btn-danger {
   @apply inline-flex items-center justify-center rounded-xl border border-red-400/25 bg-red-400/10 px-5 py-2.5 text-sm font-medium text-red-300 transition hover:bg-red-400/20;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.7s ease-out both;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out both;
+}
+
+.animate-float {
+  animation: floatY 6s ease-in-out infinite;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 /* Scrollbar styling */
@@ -75,14 +129,14 @@ input, textarea, select {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b1020;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #3f3f46;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #52525b;
 }

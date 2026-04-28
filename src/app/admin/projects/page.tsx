@@ -54,13 +54,13 @@ export default function AdminProjectsPage() {
     setData({ ...data, projects: updated });
   }
 
-  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent" /></div>;
+  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-white/60 border-t-transparent" /></div>;
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Briefcase size={24} className="text-cyan-300" />
+          <Briefcase size={24} className="text-zinc-300" />
           <h1 className="text-2xl font-bold">Edit Projects</h1>
         </div>
         <div className="flex gap-2">
@@ -86,12 +86,12 @@ export default function AdminProjectsPage() {
             </div>
             <div className="flex items-center gap-2">
               <input type="checkbox" id={`feat-${project.id}`} checked={project.featured} onChange={e => updateProject(i, "featured", e.target.checked)} />
-              <label htmlFor={`feat-${project.id}`} className="text-sm text-slate-400">Featured</label>
+              <label htmlFor={`feat-${project.id}`} className="text-sm text-zinc-400">Featured</label>
               <button onClick={() => deleteProject(i)} className="ml-auto rounded-lg p-2 text-red-400 transition hover:bg-red-400/10"><Trash2 size={16} /></button>
             </div>
           </div>
         ))}
-        {data.projects.length === 0 && <p className="text-center text-slate-500">No projects yet. Click "Add Project" to create one.</p>}
+        {data.projects.length === 0 && <p className="text-center text-zinc-500">No projects yet. Click &quot;Add Project&quot; to create one.</p>}
       </div>
     </div>
   );

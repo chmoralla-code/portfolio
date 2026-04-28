@@ -45,13 +45,13 @@ export default function AdminSkillsPage() {
     setData({ ...data, skills: updated });
   }
 
-  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent" /></div>;
+  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-white/60 border-t-transparent" /></div>;
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Code2 size={24} className="text-cyan-300" />
+          <Code2 size={24} className="text-zinc-300" />
           <h1 className="text-2xl font-bold">Edit Skills</h1>
         </div>
         <div className="flex gap-2">
@@ -68,14 +68,14 @@ export default function AdminSkillsPage() {
             <input type="text" value={skill.category} onChange={e => updateSkill(i, "category", e.target.value)} placeholder="Category" />
             <div className="flex items-center gap-2">
               <input type="range" min={0} max={100} value={skill.level} onChange={e => updateSkill(i, "level", Number(e.target.value))} className="flex-1" />
-              <span className="w-10 text-right text-sm text-slate-400">{skill.level}%</span>
+              <span className="w-10 text-right text-sm text-zinc-400">{skill.level}%</span>
             </div>
             <div className="flex items-center justify-end">
               <button onClick={() => deleteSkill(i)} className="rounded-lg p-2 text-red-400 transition hover:bg-red-400/10"><Trash2 size={16} /></button>
             </div>
           </div>
         ))}
-        {data.skills.length === 0 && <p className="text-center text-slate-500">No skills yet. Click "Add Skill" to create one.</p>}
+        {data.skills.length === 0 && <p className="text-center text-zinc-500">No skills yet. Click &quot;Add Skill&quot; to create one.</p>}
       </div>
     </div>
   );

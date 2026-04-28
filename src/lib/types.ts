@@ -55,6 +55,24 @@ export interface Profile {
   resumeUrl?: string;
 }
 
+export interface SectionHeading {
+  title: string;
+  subtitle?: string;
+}
+
+export interface SiteSettings {
+  siteName: string;
+  heroBackgroundUrl: string;
+  accentColor: string;
+  headings: {
+    about: SectionHeading;
+    skills: SectionHeading;
+    projects: SectionHeading;
+    experience: SectionHeading;
+    contact: SectionHeading;
+  };
+}
+
 export interface PortfolioData {
   profile: Profile;
   about: string;
@@ -63,4 +81,5 @@ export interface PortfolioData {
   experience: Experience[];
   socialLinks: SocialLink[];
   contact: ContactInfo;
+  settings: SiteSettings;
 }

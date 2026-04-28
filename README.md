@@ -7,7 +7,7 @@ A modern, responsive, fully editable personal portfolio website built with Next.
 - **Public Portfolio**: Hero, About, Skills, Projects, Experience, and Contact sections
 - **Admin Dashboard**: Edit all portfolio content via a protected admin interface
 - **Authentication**: Secure admin login with cookie-based session tokens
-- **Responsive Design**: Mobile-first, dark-themed with cyan/blue gradients
+- **Responsive Design**: Mobile-first monochrome design with subtle motion
 - **Persistent Storage**: PostgreSQL database via Supabase (data survives serverless cold starts)
 - **Vercel Ready**: Configured for easy deployment to Vercel
 
@@ -60,6 +60,7 @@ The admin dashboard lets you edit:
 - Projects (add, edit, delete with images, links, technologies)
 - Experience (add, edit, delete work history entries)
 - Contact info and social links
+- Site settings (site name, hero background, accent color, section headings/subtitles)
 
 ## Supabase Setup
 
@@ -194,4 +195,3 @@ claude-bot/
 ## License
 
 MIT
-

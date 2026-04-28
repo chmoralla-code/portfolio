@@ -23,14 +23,14 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#0b1020] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#050505] px-4">
       <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
+        <div className="mb-8 text-center animate-slide-up">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-zinc-200">
             <Shield size={28} />
           </div>
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-          <p className="mt-2 text-sm text-slate-400">Sign in to manage your portfolio</p>
+          <p className="mt-2 text-sm text-zinc-400">Sign in to manage your portfolio</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
             <div className="rounded-lg bg-red-400/10 px-3 py-2 text-sm text-red-300">{error}</div>
           )}
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-slate-400">Username</label>
+            <label className="mb-1.5 block text-sm font-medium text-zinc-400">Username</label>
             <input
               type="text"
               value={username}
@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
             />
           </div>
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-slate-400">Password</label>
+            <label className="mb-1.5 block text-sm font-medium text-zinc-400">Password</label>
             <input
               type="password"
               value={password}
@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-xs text-slate-500">
+        <p className="mt-6 text-center text-xs text-zinc-500">
           Default: admin / admin1234
         </p>
       </div>

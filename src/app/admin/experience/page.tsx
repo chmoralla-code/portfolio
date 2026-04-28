@@ -54,13 +54,13 @@ export default function AdminExperiencePage() {
     setData({ ...data, experience: updated });
   }
 
-  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent" /></div>;
+  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-white/60 border-t-transparent" /></div>;
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <History size={24} className="text-cyan-300" />
+          <History size={24} className="text-zinc-300" />
           <h1 className="text-2xl font-bold">Edit Experience</h1>
         </div>
         <div className="flex gap-2">
@@ -85,12 +85,12 @@ export default function AdminExperiencePage() {
             <textarea rows={3} value={exp.description} onChange={e => updateExperience(i, "description", e.target.value)} placeholder="Description" />
             <div className="flex items-center gap-2">
               <input type="checkbox" id={`cur-${exp.id}`} checked={exp.current} onChange={e => updateExperience(i, "current", e.target.checked)} />
-              <label htmlFor={`cur-${exp.id}`} className="text-sm text-slate-400">Current position</label>
+              <label htmlFor={`cur-${exp.id}`} className="text-sm text-zinc-400">Current position</label>
               <button onClick={() => deleteExperience(i)} className="ml-auto rounded-lg p-2 text-red-400 transition hover:bg-red-400/10"><Trash2 size={16} /></button>
             </div>
           </div>
         ))}
-        {data.experience.length === 0 && <p className="text-center text-slate-500">No experience entries yet. Click "Add Experience" to create one.</p>}
+        {data.experience.length === 0 && <p className="text-center text-zinc-500">No experience entries yet. Click &quot;Add Experience&quot; to create one.</p>}
       </div>
     </div>
   );

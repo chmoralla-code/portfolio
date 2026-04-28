@@ -1,16 +1,19 @@
 "use client";
 import { Briefcase, ExternalLink, Github } from "lucide-react";
-import type { Project } from "@/lib/types";
+import type { Project, SiteSettings } from "@/lib/types";
 
-export function ProjectsSection({ projects }: { projects: Project[] }) {
+export function ProjectsSection({ projects, settings }: { projects: Project[]; settings: SiteSettings }) {
   return (
     <section id="projects" className="border-t border-white/5">
       <div className="section-container">
-        <div className="mb-12 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-1.5 text-sm font-medium text-cyan-300">
+        <div className="animate-slide-up mb-12 text-center">
+          <div className="pill-label mb-4">
             <Briefcase size={14} /> Projects
           </div>
-          <h2 className="section-title">Featured Work</h2>
+          <h2 className="section-title">{settings.headings.projects.title}</h2>
+          {settings.headings.projects.subtitle && (
+            <p className="section-subtitle">{settings.headings.projects.subtitle}</p>
+          )}
         </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
@@ -20,20 +23,20 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
               </div>
               <div className="p-6">
                 <h3 className="mb-2 text-lg font-semibold">{project.title}</h3>
-                <p className="mb-4 text-sm leading-relaxed text-slate-400">{project.description}</p>
+                <p className="mb-4 text-sm leading-relaxed text-zinc-400">{project.description}</p>
                 <div className="mb-4 flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
-                    <span key={tech} className="rounded-full bg-cyan-400/10 px-2.5 py-1 text-xs font-medium text-cyan-300">{tech}</span>
+                    <span key={tech} className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-medium text-zinc-300">{tech}</span>
                   ))}
                 </div>
                 <div className="flex gap-3">
                   {project.demoUrl && project.demoUrl !== "#" && (
-                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-300 transition hover:text-cyan-200">
+                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-200 transition hover:text-white">
                       Live Demo <ExternalLink size={14} />
                     </a>
                   )}
                   {project.repoUrl && project.repoUrl !== "#" && (
-                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition hover:text-white">
+                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-400 transition hover:text-white">
                       Source <Github size={14} />
                     </a>
                   )}

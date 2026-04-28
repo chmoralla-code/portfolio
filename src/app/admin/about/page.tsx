@@ -25,13 +25,13 @@ export default function AdminAboutPage() {
     setTimeout(() => setMsg(""), 3000);
   }
 
-  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent" /></div>;
+  if (!data) return <div className="flex h-40 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-white/60 border-t-transparent" /></div>;
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <FileText size={24} className="text-cyan-300" />
+          <FileText size={24} className="text-zinc-300" />
           <h1 className="text-2xl font-bold">Edit About</h1>
         </div>
         <button onClick={save} disabled={saving} className="btn-primary flex items-center gap-2">
@@ -41,7 +41,7 @@ export default function AdminAboutPage() {
       {msg && <div className="mb-4 rounded-lg bg-emerald-400/10 px-3 py-2 text-sm text-emerald-300">{msg}</div>}
 
       <div className="card">
-        <label className="mb-1.5 block text-sm font-medium text-slate-400">About / Bio</label>
+        <label className="mb-1.5 block text-sm font-medium text-zinc-400">About / Bio</label>
         <textarea rows={10} value={data.about} onChange={e => setData({ ...data, about: e.target.value })} />
       </div>
     </div>
